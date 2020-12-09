@@ -46,4 +46,19 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\CampaignPermission', 'user_id');
     }
+
+    public function campaigns()
+    {
+//        \Event::listen('Illuminate\Database\Events\QueryExecuted', function ($query) {
+//            dump($query->sql, $query->bindings, $query->time);
+//        });
+        return $this->hasManyThrough(
+            'App\Models\Campaign',
+            'App\Models\CampaignPermission',
+            'user_id',
+            'id',
+            'id',
+            'campaign_id'
+        );
+    }
 }

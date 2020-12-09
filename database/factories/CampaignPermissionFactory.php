@@ -22,9 +22,9 @@ class CampaignPermissionFactory extends Factory
     public function definition()
     {
         return [
-            'campaign_id' => $this->faker->numberBetween(1, 10),
-            'user_id' => $this->faker->numberBetween(1, 10),
-            'permission' => $this->faker->randomElement(['administrator', 'contributor', 'reader'])
+            'campaign_id' => $this->faker->unique()->numberBetween(1, 100),
+            'user_id' => $this->faker->unique()->numberBetween(1, 100),
+            'permission' => $this->faker->randomElement(['owner', 'administrator', 'contributor', 'reader'])
         ];
     }
 }

@@ -9,13 +9,26 @@ class CampaignPermission extends Model
 {
     use HasFactory;
 
-    public function campaigns()
+    protected $fillable = [
+        'campaign_id',
+        'user_id',
+    ];
+
+    protected $visible = [
+        'campaign_id',
+        'owner_id',
+        'permission',
+        'token',
+        'expires_at'
+    ];
+
+    public function campaign()
     {
-        return $this->belongsTo('Campaign', 'campaign_id');
+        return $this->belongsTo('App\Models\Campaign', 'campaign_id');
     }
 
     public function user()
     {
-        return $this->belongsTo('User', 'user_id');
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 }

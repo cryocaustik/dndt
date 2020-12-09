@@ -24,8 +24,7 @@ class CampaignFactory extends Factory
         return [
             'name' => $this->faker->company,
             'dm' => $this->faker->name,
-            'active' => $this->faker->boolean,
-            'owner_id' => $this->faker->numberBetween(1, 10)
+            'active' => $this->faker->boolean
         ];
     }
 }

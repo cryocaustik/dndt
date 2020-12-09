@@ -2,7 +2,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link text-center">
-        <span class="brand-text font-weight-light">DnDT</span>
+        <img class="brand-image-xl logo-xs" src="{{ asset('img/logo-50.png') }}" alt="DnDT" style="filter: invert(100%)">
+        <span class="brand-text font-weight-light">DnD<b>T</b></span>
     </a>
 
     <!-- Sidebar -->
@@ -37,7 +38,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('campaign.permission.list') }}" class="nav-link
+                        {{ Route::is('campaign.permission.list') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>Campaign Permissions</p>
                     </a>

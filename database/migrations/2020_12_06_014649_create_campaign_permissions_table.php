@@ -16,11 +16,14 @@ class CreateCampaignPermissionsTable extends Migration
         Schema::create('campaign_permissions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('campaign_id');
-            $table->foreign('campaign_id')->references('id')->on('campaigns');
+            $table->foreign('campaign_id')->references('id')->on('campaigns')
+                ->onDelete('CASCADE');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('CASCADE');
             $table->string('permission');
             $table->timestamps();
+            $table->unique(['campaign_id', 'user_id']);
         });
     }
 

@@ -18,8 +18,6 @@ class CreateCampaignsTable extends Migration
             $table->string('name');
             $table->string('dm')->nullable();
             $table->boolean('active')->default(true);
-            $table->unsignedBigInteger('owner_id');
-            $table->foreign('owner_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

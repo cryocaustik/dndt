@@ -14,13 +14,33 @@
 
     @stack('css')
 </head>
-<body>
+<body class="sidebar-mini">
     <div class="wrapper">
-        @include('includes.nav')
+        @include('includes.header')
         @include('includes.sidenav')
 
         <div class="content-wrapper">
-            @yield('content')
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">
+                                @yield('page_header')
+                                <small>@yield('page_description')</small>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="container-fluid">
+                <!-- Notifications -->
+                @include('includes.notifications')
+
+                <!-- Main content -->
+                @yield('content')
+            </div>
         </div>
     </div>
 

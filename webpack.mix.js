@@ -15,6 +15,9 @@ mix.copy('vendor/almasaeed2010/adminlte/dist/css', 'public/adminlte/css');
 mix.copy('vendor/almasaeed2010/adminlte/dist/js', 'public/adminlte/js');
 mix.copy('vendor/almasaeed2010/adminlte/plugins', 'public/adminlte/plugins');
 
+mix.copy('vendor/snapappointments/bootstrap-select/dist/css', 'public/bootstrap-select/css');
+mix.copy('vendor/snapappointments/bootstrap-select/dist/js', 'public/bootstrap-select/js');
+
 mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
