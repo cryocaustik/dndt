@@ -6,6 +6,7 @@ use App\Models\Campaign;
 use App\Models\CampaignPermission;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class CampaignPermissionPolicy
 {
@@ -66,7 +67,15 @@ class CampaignPermissionPolicy
      */
     public function delete(User $user, CampaignPermission $campaignPermission)
     {
-        //
+        $permission = CampaignPermission::where([
+            ['user_id', $user->id],
+            ['campaign_id', $campaignPermission->campaign_id],
+        ])
+            ->whereIn('permission', ['owner', 'administrator'])
+            ->exists();
+
+        $self = $campaignPermission->user_id === Auth::id();
+        return $permission || $self;
     }
 
     /**

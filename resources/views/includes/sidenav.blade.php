@@ -27,36 +27,61 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
-                <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
-
-                <li class="nav-item">
-                    <a href="{{ route('campaign.list') }}" class="nav-link {{ Route::is('campaign.list') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>Campaigns</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('campaign.permission.list') }}" class="nav-link
-                        {{ Route::is('campaign.permission.list') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>Campaign Permissions</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
+                <li class="nav-item menu {{ Route::is('campaign.*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>Inventory</p>
+                        <i class="nav-icon fas fa-fire-smoke"></i>
+                        <p>
+                            Campaigns
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('campaign.list') }}" class="nav-link {{ Route::is('campaign.list') ? 'active' : '' }}">
+                                <i class="nav-icon fal fa-fire-smoke"></i>
+                                <p>Campaigns</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('campaign.permission.list') }}" class="nav-link {{ Route::is('campaign.permission.list') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-user-cog"></i>
+                                <p>Campaign Permissions</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
+                <li class="nav-item menu {{ Route::is('inventory.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-backpack"></i>
+                        <p>
+                            Inventory
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('inventory.summary') }}" class="nav-link {{ Route::is('inventory.summary') ? 'active' : '' }}">
+                                <i class="nav-icon fal fa-backpack"></i>
+                                <p>Summary</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-clipboard-list"></i>
+                                <p>Log</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
 
                 <li class="nav-item menu">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-users-crown"></i>
                         <p>
-                            Starter Pages
+                            Admin
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>

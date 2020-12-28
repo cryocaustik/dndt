@@ -12,7 +12,15 @@ class CampaignPermissionController extends Controller
     {
         if($request->ajax())
         {
-            return datatables()->of(CampaignPermission::where('user_id', Auth::id()))
+            return datatables()->of(
+                    CampaignPermission::where('user_id', Auth::id())
+                        ->orWhereIn(
+                            'campaign_id',
+                            CampaignPermission::where('user_id', Auth::id())
+                                ->whereIn('permission', ['owner', 'administrator'])
+                                ->pluck('campaign_id')
+                        )
+                )
                 ->addColumn('campaign_name', function ($row){
                     return $row->campaign->name;
                 })

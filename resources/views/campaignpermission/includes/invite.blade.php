@@ -49,7 +49,7 @@
         let expires = $('#expires').val();
         let permission = $('#permission').val();
         $.ajax({
-            url: "{{ route('campaign.permission.invite') }}",
+            url: "{{ route('campaign.invite') }}",
             type: 'POST',
             headers: {
                 'X-CSRF-Token': "{{ csrf_token() }}"

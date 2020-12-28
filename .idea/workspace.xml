@@ -20,41 +20,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04bd3b90-7c57-46e5-ae29-f3f579ebe4f5" name="Default Changelist" comment="function - initial commit">
-      <change afterPath="$PROJECT_DIR$/resources/views/campaign/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/campaign/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/campaign/includes/buttons.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/campaignpermission/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/campaignpermission/includes/buttons.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/campaignpermission/includes/invite.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/campaignpermission/invite.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/campaignpermission/list.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/includes/bootstrap-select.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/includes/datatables.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/includes/notifications.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/includes/select2.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dnd-tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dnd-tracker.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/v1/InventoryController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/includes/vuejs.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/inventory/includes/buttons.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/inventory/summary.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CampaignController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CampaignController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Campaign.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Campaign.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CampaignPermissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CampaignPermissionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Inventory.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/CampaignPermission.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/CampaignPermission.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/CampaignFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/CampaignFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/CampaignPermissionFactory.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/UserFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_06_014617_create_campaigns_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_06_014617_create_campaigns_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_06_014649_create_campaign_permissions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_06_014649_create_campaign_permissions_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_06_014707_create_inventories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_06_014707_create_inventories_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DemoSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DemoSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/campaign/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/campaign/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/includes/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Inventory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Policies/CampaignPermissionPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/CampaignPermissionPolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/campaign/includes/buttons.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/campaign/includes/buttons.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/campaignpermission/includes/buttons.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/campaignpermission/includes/buttons.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/campaignpermission/includes/invite.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/campaignpermission/includes/invite.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/includes/sidenav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/sidenav.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/grids/12.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/grids/12.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,10 +182,21 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../xampp/php/php.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Api/Controllers" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\dnd-tracker\app\Http\Api\Controllers" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\dev\dnd-tracker\app\Http\Controllers\Api\v1" />
+      <recent name="C:\dev\dnd-tracker\app\Http\Controllers\Api" />
+      <recent name="C:\dev\dnd-tracker\app\Http\Controllers" />
+      <recent name="C:\dev\dnd-tracker\resources\views\includes" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -225,7 +219,15 @@
       <workItem from="1607306090275" duration="18359000" />
       <workItem from="1607382401988" duration="15656000" />
       <workItem from="1607409163238" duration="8368000" />
-      <workItem from="1607443017867" duration="26302000" />
+      <workItem from="1607443017867" duration="28776000" />
+      <workItem from="1607632549224" duration="7976000" />
+      <workItem from="1607825210870" duration="26000" />
+      <workItem from="1607825260541" duration="7483000" />
+      <workItem from="1608102235216" duration="596000" />
+      <workItem from="1608188382962" duration="843000" />
+      <workItem from="1608189880809" duration="2632000" />
+      <workItem from="1609195316227" duration="421000" />
+      <workItem from="1609195771715" duration="3511000" />
     </task>
     <servers />
   </component>
@@ -255,39 +257,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="211" y="531" width="1085" height="849" key="#Log_Highlighting_(ideolog)" timestamp="1607496354145">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="211" y="531" width="1085" height="849" key="#Log_Highlighting_(ideolog)/-2160.-817.1440.2520/0.0.2560.1400@-2160.-817.1440.2520" timestamp="1607496354145" />
-    <state x="-1759" y="180" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1607305978916">
-      <screen x="-2160" y="-817" width="1440" height="2520" />
-    </state>
-    <state x="-1759" y="180" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-2160.-817.1440.2520/0.0.2560.1400@-2160.-817.1440.2520" timestamp="1607305978916" />
-    <state x="-1709" y="199" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1607500117414">
-      <screen x="-2160" y="-817" width="1440" height="2520" />
-    </state>
-    <state x="-1709" y="199" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-2160.-817.1440.2520/0.0.2560.1400@-2160.-817.1440.2520" timestamp="1607500117414" />
-    <state x="-1818" y="-66" key="CommitChangelistDialog2" timestamp="1607292213711">
-      <screen x="-2160" y="-817" width="1440" height="2520" />
-    </state>
-    <state x="-1818" y="-66" key="CommitChangelistDialog2/-2160.-817.1440.2520/0.0.2560.1400@-2160.-817.1440.2520" timestamp="1607292213711" />
-    <state x="-1938" y="89" key="SettingsEditor" timestamp="1607409148587">
-      <screen x="-2160" y="-817" width="1440" height="2520" />
-    </state>
-    <state x="-1938" y="89" key="SettingsEditor/-2160.-817.1440.2520/0.0.2560.1400@-2160.-817.1440.2520" timestamp="1607409148587" />
-    <state x="-1561" y="96" width="578" height="695" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1607292237173">
-      <screen x="-2160" y="-817" width="1440" height="2520" />
-    </state>
-    <state x="-1561" y="96" width="578" height="695" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/-2160.-817.1440.2520/0.0.2560.1400@-2160.-817.1440.2520" timestamp="1607292237173" />
-    <state x="937" y="331" width="672" height="677" key="run.anything.popup" timestamp="1607420413631">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="937" y="331" width="672" height="677" key="run.anything.popup/-2160.-817.1440.2520/0.0.2560.1400@0.0.2560.1400" timestamp="1607420413631" />
-    <state x="-1777" y="-222" width="672" height="678" key="search.everywhere.popup" timestamp="1607494832050">
-      <screen x="-2160" y="-817" width="1440" height="2520" />
-    </state>
-    <state x="-1777" y="-222" width="672" height="678" key="search.everywhere.popup/-2160.-817.1440.2520/0.0.2560.1400@-2160.-817.1440.2520" timestamp="1607494832050" />
   </component>
 </project>

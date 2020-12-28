@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Inventory extends Model
 {
     use HasFactory;
+
+    public function campaign()
+    {
+        return $this->belongsTo('App\Models\Campaign', 'campaign_id');
+    }
 }

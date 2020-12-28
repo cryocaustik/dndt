@@ -7,9 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>DnDT | @yield('title', 'DnD Tracker')</title>
 
+    {{-- fontawesome --}}
+    <link rel="stylesheet" href="{{ asset('fa5/css/all.css') }}">
+
     {{-- AdminLte --}}
     <link rel="stylesheet" href="{{ asset('adminlte/css/adminlte.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
+{{--    <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">--}}
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     @stack('css')

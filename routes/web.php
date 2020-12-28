@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CampaignController;
 use \App\Http\Controllers\CampaignPermissionController;
+use \App\Http\Controllers\InventoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,5 +47,9 @@ Route::group([
         Route::get('/edit/{id}', [CampaignPermissionController::class, 'edit'])->name('campaign.permission.edit');
         Route::get('/invite', [CampaignPermissionController::class, 'invite'])->name('campaign.permission.invite');
         Route::post('/invite', [CampaignPermissionController::class, 'invite'])->name('campaign.permission.invite');
+    });
+
+    Route::group(['prefix' => 'inventory'], function (){
+        Route::get('/summary/{id?}', [InventoryController::class, 'summary'])->name('inventory.summary');
     });
 });

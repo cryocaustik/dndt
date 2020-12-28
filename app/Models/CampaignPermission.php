@@ -14,14 +14,6 @@ class CampaignPermission extends Model
         'user_id',
     ];
 
-    protected $visible = [
-        'campaign_id',
-        'owner_id',
-        'permission',
-        'token',
-        'expires_at'
-    ];
-
     public function campaign()
     {
         return $this->belongsTo('App\Models\Campaign', 'campaign_id');

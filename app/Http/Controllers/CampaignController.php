@@ -148,7 +148,7 @@ class CampaignController extends Controller
                 $invite->token = Str::uuid();
                 $invite->save();
 
-                return response()->json(['invite' => route('campaign.invite.use', '$invite->token')]);
+                return response()->json(['invite' => route('campaign.invite.use', $invite->token)]);
             default:
                 return view('campaignpermission.invite', ['campaigns' => Auth::user()->campaigns]);
         }
@@ -157,8 +157,28 @@ class CampaignController extends Controller
     public function inviteUse(Request $request, $token)
     {
         $invite = Invite::where('token', $token)->first();
-        if($invite->expires_at > )
-        return '';
+        if(!$invite || $invite->expires_at < Carbon::now() || !$invite->active)
+            return redirect()->route('home')->withErrors('Invite link has expired!');
+
+        $existingPermissions = CampaignPermission::where([
+                ['user_id', Auth::id()],
+                ['campaign_id', $invite->campaign_id]
+            ])->first();
+        if($existingPermissions)
+            return redirect()->route('campaign.list')
+                ->withErrors('you already have access to '. $existingPermissions->campaign->name);
+
+        Log::debug(['inviteUse' => 'create']);
+        $permission = new CampaignPermission;
+        $permission->campaign_id = $invite->campaign_id;
+        $permission->user_id = Auth::id();
+        $permission->permission = $invite->permission;
+        $permission->save();
+
+        Log::debug(['inviteUse' => 'return']);
+        return redirect()
+            ->route('campaign.list')
+            ->with(['success' => 'You have been granted access to '. $permission->campaign->name]);
     }
 }
 
