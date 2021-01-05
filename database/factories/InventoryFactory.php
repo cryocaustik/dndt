@@ -121,13 +121,16 @@ class InventoryFactory extends Factory
                 'Rod of the Pact Keeper',
                 'Rod of Lordly Might',
                 'Rod of Resurrection']),
-            'description' => '',
+            'source' => $this->faker->userName,
+            'notes' => '',
             'quantity' => $this->faker->numberBetween(1, 100),
-            'acquired_at' => $this->faker->dateTime,
+            'occurred_on' => $this->faker->dateTime,
             'held_by' => $this->faker->name,
             'claimed' => $this->faker->boolean,
             'claimed_by' => $this->faker->name,
-            'in_bag_of_holding' => $this->faker->boolean
+            'in_bag_of_holding' => $this->faker->boolean,
+            'created_by' => $this->faker->numberBetween(1, 10),
+            'modified_by' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

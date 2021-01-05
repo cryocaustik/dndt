@@ -29,6 +29,10 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-check mb-3">
+                            <input type="checkbox" name="remember_me" class="form-check-input">
+                            <label for="remember_me" class="form-check-label">Remember me</label>
+                        </div>
                         <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                     </form>
 

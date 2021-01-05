@@ -19,13 +19,20 @@ class CreateInventoriesTable extends Migration
             $table->foreign('campaign_id')->references('id')->on('campaigns')
                 ->onDelete('CASCADE');
             $table->string('item');
-            $table->string('description');
+            $table->text('source')->nullable();
+            $table->text('notes')->nullable();
             $table->integer('quantity');
-            $table->dateTime('acquired_at')->useCurrent();
+            $table->dateTime('occurred_on')->useCurrent();
             $table->string('held_by')->nullable();
             $table->boolean('claimed')->default(false);
             $table->string('claimed_by')->nullable();
             $table->boolean('in_bag_of_holding')->default(false);
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users')
+                ->onDelete('NO ACTION');
+            $table->unsignedBigInteger('modified_by')->nullable();
+            $table->foreign('modified_by')->references('id')->on('users')
+                ->onDelete('NO ACTION');
             $table->timestamps();
         });
     }

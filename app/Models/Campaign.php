@@ -16,16 +16,27 @@ class Campaign extends Model
     protected $fillable = [
         'name',
         'dm',
-        'owner_id',
         'active'
     ];
 
+//    public function owner()
+//    {
+////        \Event::listen('Illuminate\Database\Events\QueryExecuted', function ($query) {
+////            dump($query->sql, $query->bindings, $query->time);
+////        });
+//        return $this->hasOne('App\Models\CampaignPermission')->where('permission', 'owner');
+//    }
+
     public function owner()
     {
-//        \Event::listen('Illuminate\Database\Events\QueryExecuted', function ($query) {
-//            dump($query->sql, $query->bindings, $query->time);
-//        });
-        return $this->hasOne('App\Models\CampaignPermission')->where('permission', 'owner');
+        return $this->hasOneThrough(
+            User::class,
+            CampaignPermission::class,
+            'campaign_id',
+            'id',
+            'id',
+            'user_id'
+        )->where('campaign_permissions.permission', 'owner');
     }
 
     public function getOwner()

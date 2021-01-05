@@ -29,7 +29,7 @@ class CampaignController extends Controller
                         ->whereHas('permissions', function ($query) { $query->where('user_id', Auth::id()); })
                 )
                 ->editColumn('owner', function($row){
-                    return $row->owner->user->username;
+                    return $row->owner->username;
                 })
                 ->addColumn('actions', function ($row) {
                     return view('campaign.includes.buttons', ['campaign' => $row]);

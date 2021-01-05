@@ -12,7 +12,7 @@ class LoginController extends Controller
         return 'username';
     }
 
-    public function login()
+    public function login(Request $request)
     {
         return view('auth.login');
     }
@@ -33,10 +33,11 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->only('username', 'password');
+        $remember = $request->input('remember_me', false);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $remember)) {
             // Authentication passed...
-            return redirect()->intended(route('home'));
+            return redirect()->intended();
         }
         else {
             return back()->withErrors('login failed');

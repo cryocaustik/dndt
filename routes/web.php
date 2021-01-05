@@ -17,9 +17,10 @@ use \App\Http\Controllers\InventoryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.app');
 })->name('home');
 
+//Auth::routes();
 Route::group(['prefix' => 'auth'], function (){
     Route::get('login', [\App\Http\Controllers\LoginController::class, 'login'])->name('login');
     Route::post('login', [\App\Http\Controllers\LoginController::class, 'authenticate'])->name('login');

@@ -1,57 +1,41 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DnDT | @yield('title', 'DnD Tracker')</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{-- fontawesome --}}
-    <link rel="stylesheet" href="{{ asset('fa5/css/all.css') }}">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {{-- AdminLte --}}
-    <link rel="stylesheet" href="{{ asset('adminlte/css/adminlte.min.css') }}">
-{{--    <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">--}}
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    @if (Auth::check())
+        <script>window.authUser={!! json_encode(Auth::user()); !!};</script>
+    @else
+        <script>window.authUser=null;</script>
+    @endif
 
+    <title>{{ config('app.name', 'Laravel') }} | @yield('title', 'DnD Tracker')</title>
+
+    <!-- Scripts -->
+    <script>
+        window.Domain = "{{ env('APP_URL') }}";
+    </script>
+    <script src="{{ asset('js/main.js') }}" defer></script>
+    @stack('header-js')
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('css')
 </head>
-<body class="sidebar-mini">
-    <div class="wrapper">
-        @include('includes.header')
-        @include('includes.sidenav')
-
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">
-                                @yield('page_header')
-                                <small>@yield('page_description')</small>
-                            </h1>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div class="container-fluid">
-                <!-- Notifications -->
-                @include('includes.notifications')
-
-                <!-- Main content -->
-                @yield('content')
-            </div>
-        </div>
+<body>
+    <div id="app">
     </div>
 
-    {{-- AdminLte --}}
-    <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('adminlte/js/adminlte.min.js') }}"></script>
     @stack('js')
 </body>
 </html>

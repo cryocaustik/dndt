@@ -12,6 +12,7 @@ class CampaignPermission extends Model
     protected $fillable = [
         'campaign_id',
         'user_id',
+        'permission'
     ];
 
     public function campaign()

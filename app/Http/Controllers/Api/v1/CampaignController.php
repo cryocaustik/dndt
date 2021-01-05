@@ -1,0 +1,75 @@
+<?php
+
+namespace App\Http\Controllers\Api\v1;
+
+use App\Http\Controllers\Controller;
+use App\Models\Campaign;
+use App\Models\CampaignPermission;
+use App\Models\Inventory;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
+class CampaignController extends Controller
+{
+    public function list()
+    {
+        $campaigns = Campaign::with('owner')
+            ->whereIn('id', CampaignPermission::where('user_id', Auth::id())->pluck('campaign_id'))
+            ->get();
+        return response()->json($campaigns);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->all();
+        $rules = [
+            'name' => ['required', 'min:2', 'max:500'],
+            'dm' => ['string', 'nullable'],
+            'in_bag_of_holding' => ['boolean']
+        ];
+        $validator = Validator::make($data, $rules);
+        if($validator->fails()){
+            return response()->json(['msg' => 'Validation Failed','validation' => $validator->errors()], 422);
+        }
+
+        $campaign = Campaign::create($data);
+        $ownerPermission = CampaignPermission::create([
+            'campaign_id' => $campaign->id,
+            'user_id' => Auth::id(),
+            'permission' => 'owner'
+        ]);
+        return response()->json($campaign, 201);
+    }
+
+    public function update(Request $request)
+    {
+        $data = $request->all();
+
+        $rules = [
+            'id' => ['required', 'exists:campaigns,id'],
+            'name' => ['required', 'string'],
+            'dm' => ['string', 'nullable'],
+            'active' => ['boolean'],
+        ];
+        $validator = Validator::make($data, $rules);
+        if($validator->fails()){
+            return response()->json(['msg' => 'Validation Failed','validation' => $validator->errors()], 422);
+        }
+
+        $campaign = Campaign::find($data['id']);
+        if(!$campaign){
+            return response()->json(['msg' => 'item not found', 'item' => $data]);
+        }
+
+        $data['modified_by'] = Auth::id();
+        $campaign->fill($data);
+        if($campaign->isDirty()){
+            $campaign->save();
+            $msg = ['success' => 'Campaign has been updated!'];
+        } else {
+            $msg = ['info' => 'Campaign did not have any changes.'];
+        }
+        return response()->json($msg, 204);
+    }
+}
