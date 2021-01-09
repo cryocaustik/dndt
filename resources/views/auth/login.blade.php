@@ -38,7 +38,7 @@
 
                     <div class="social-auth-links text-center mb-3">
                         <p>- OR -</p>
-                        <a href="#" class="btn btn-block text-light" style="background-color: #7289da">
+                        <a href="{{ route('oauth.redirect', 'discord') }}" class="btn btn-block text-light" style="background-color: #7289da">
                             <i class="fab fa-discord mr-2"></i> Discord
                         </a>
                     </div>
@@ -48,7 +48,7 @@
                         <a href="forgot-password.html">forgot my password</a>
                     </p>
                     <p class="mb-0 text-center">
-                        <a href="register.html" class="text-center">Register</a>
+                        <a href="{{ route('register') }}" class="text-center">Register</a>
                     </p>
                 </div>
                 <!-- /.login-card-body -->

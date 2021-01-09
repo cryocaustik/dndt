@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use \App\Http\Controllers\Api\v1\CampaignController;
 use \App\Http\Controllers\Api\v1\InventoryController;
+use \App\Http\Controllers\Api\v1\CampaignPermissionController;
+use App\Http\Controllers\Api\v1\InviteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,22 @@ Route::group([
         Route::post('/store', [CampaignController::class, 'store'])->name('api.campaign.store');
         Route::put('/update', [CampaignController::class, 'update'])->name('api.campaign.update');
     });
+
+    Route::group(['prefix' => 'permission'], function(){
+        Route::get('/', [CampaignPermissionController::class, 'list'])
+            ->name('api.permission.list');
+        Route::put('/update', [CampaignPermissionController::class, 'update'])
+            ->name('api.permission.update');
+        Route::post('/delete', [CampaignPermissionController::class, 'delete'])
+            ->name('api.permission.delete');
+    });
+
+    Route::group(['prefix' => 'invite'], function(){
+        Route::get('/', [InviteController::class, 'list'])->name('api.invite.list');
+        Route::post('/store', [InviteController::class, 'store'])->name('api.invite.store');
+        Route::post('/delete', [InviteController::class, 'delete'])->name('api.invite.delete');
+    });
+
     Route::group(['prefix' => 'inventory'], function(){
         Route::get('/summary/{campaign_id}', [InventoryController::class, 'summary'])
             ->name('api.inventory.summary');

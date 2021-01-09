@@ -33,31 +33,11 @@
 
         </v-toolbar>
 
-        <v-tabs
-            color="red"
-            v-model="tab"
-        >
-            <v-tab key="summary" style="width: 50%;">Summary</v-tab>
-            <v-tab key="permissions" style="width: 50%;">Permissions</v-tab>
-        </v-tabs>
-        <v-tabs-items v-model="tab">
-
-            <v-tab-item key="summary">
-                <Summary
-                    :search="search"
-                    v-on:view="view"
-                />
-            </v-tab-item>
-
-            <v-tab-item key="log">
-<!--                <Log-->
-<!--                    :campaignId="selectedCampaign"-->
-<!--                    :campaignSelect="campaignSelect"-->
-<!--                    :search="search"-->
-<!--                />-->
-            </v-tab-item>
-
-        </v-tabs-items>
+        <v-card>
+            <Summary
+                :search="search"
+            />
+        </v-card>
 
         <AddNew
             :addNewDialog="addNewDialog"
@@ -80,10 +60,6 @@ export default {
     methods: {
         refresh(){
             console.log("refresh")
-        },
-        view(campaign){
-            this.search = campaign
-            this.tab = 1
         }
     },
     components: {

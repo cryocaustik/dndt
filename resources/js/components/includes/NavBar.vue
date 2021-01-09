@@ -6,11 +6,14 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn v-if="this.$store.getters.isLoggedIn" text href="/auth/logout">
+        <v-btn v-if="this.$store.getters.isLoggedIn" text @click="logout">
             <span class="mr-2">Logout</span>
         </v-btn>
-        <v-btn v-else text href="/auth/login">
+        <v-btn v-else text to="/login">
             <span class="mr-2">Login</span>
+        </v-btn>
+        <v-btn v-else text to="/register">
+            <span class="mr-2">Register</span>
         </v-btn>
     </v-app-bar>
 </template>
@@ -20,6 +23,11 @@ export default {
     data(){
         return {
             routes: []
+        }
+    },
+    methods: {
+        logout(){
+            this.$store.dispatch('logout')
         }
     },
     mounted() {

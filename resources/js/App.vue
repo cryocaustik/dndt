@@ -1,10 +1,9 @@
 <template>
     <v-app>
-        <NavBar />
-        <NavDrawer />
+        <NavBar v-if="!minimizedApp"/>
+        <NavDrawer v-if="!minimizedApp"/>
 
         <v-main>
-            <Notification />
             <router-view></router-view>
         </v-main>
     </v-app>
@@ -13,14 +12,17 @@
 <script>
 import NavBar from "./components/includes/NavBar";
 import NavDrawer from "./components/includes/NavDrawer";
-import Notification from "./components/includes/Notification";
 
 export default {
     name: "App",
+    computed: {
+        minimizedApp(){
+            return this.$store.state.minimizedApp
+        }
+    },
     components: {
         NavBar,
-        NavDrawer,
-        Notification
+        NavDrawer
     },
     mounted() {
         this.$store.commit('setAuthUser', window.authUser);

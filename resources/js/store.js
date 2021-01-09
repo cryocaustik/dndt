@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import router from "./router";
 
 Vue.use(Vuex);
 const apiBase = `${window.Domain}/api/v1`;
@@ -8,13 +9,23 @@ export default new Vuex.Store({
     state: {
         user: null,
         axiosPending: false,
-        messages: [],
-        errors: [],
+        minimizedApp: false,
         api: {
             campaign: {
                 list: `${apiBase}/campaign`,
                 store: `${apiBase}/campaign/store`,
                 update: `${apiBase}/campaign/update`,
+            },
+            permission: {
+                list: `${apiBase}/permission`,
+                update: `${apiBase}/permission/update`,
+                invite: `${apiBase}/permission/invite`,
+            },
+            invite: {
+                list: `${apiBase}/invite`,
+                store: `${apiBase}/invite/store`,
+                delete: `${apiBase}/invite/delete`,
+                token: `${apiBase}/invite`,
             },
             inventory: {
                 log: `${apiBase}/inventory/log`,
@@ -33,7 +44,9 @@ export default new Vuex.Store({
         campaign: {
             list: [],
             permissions: [],
-        }
+            invites: [],
+            inviteToken: null,
+        },
     },
     mutations: {
         setAuthUser(state, user) {
@@ -55,6 +68,48 @@ export default new Vuex.Store({
         }
     },
     actions: {
+        // Ayth
+        login(context, credentials){
+            axios
+                .post(`${window.Domain}/auth/login`, credentials)
+                .then(resp => {
+                    location.href = "/"
+                })
+                .catch(err => {
+                    window.Vue.$vToastify.error(`Login failed`, err.response.status);
+                    console.log(`login failed`)
+                    console.log(err)
+                })
+        },
+        logout(context){
+            axios
+                .post(`${window.Domain}/auth/logout`)
+                .then(() => {
+                    context.state.user = null
+                    window.authUser = null
+                    router.push('/login')
+                    // location.href = "/login"
+                })
+                .catch(err => {
+                    window.Vue.$vToastify.error(`logout failed`, err.response.status);
+                    console.log(`logout error`)
+                    console.log(err)
+                })
+        },
+        register(context, credentials){
+            axios
+                .post(`${window.Domain}/auth/register`, credentials)
+                .then(() => {
+                    location.href = "/"
+                })
+                .catch(err => {
+                    window.Vue.$vToastify.error(`registration failed`, err.response.status);
+                    console.log(`register error`)
+                    console.log(err)
+                })
+        },
+
+        // Campaign
         getCampaigns(context){
             context.commit('axiosStatus', true);
             let url = context.state.api.campaign.list;
@@ -72,6 +127,105 @@ export default new Vuex.Store({
                     console.log(err)
                 })
         },
+        storeCampaign(context, campaign){
+            axios
+                .post(context.state.api.campaign.store, campaign)
+                .then(() => {
+                    window.Vue.$vToastify.success(`${campaign.name} has been created`, 'Success');
+                    context.dispatch('getCampaigns');
+                })
+                .catch(err => {
+                    window.Vue.$vToastify.error(`Campaign create failed for ${campaign.name}`, err.response.status);
+                    console.log(`storeCampaign error: ${JSON.stringify(campaign)}`)
+                    console.log(err)
+                })
+        },
+        updateCampaign(context, campaign){
+            axios
+                .put(context.state.api.campaign.update, campaign)
+                .then(() => {
+                    window.Vue.$vToastify.success(`${campaign.name} has been updated`, 'Success');
+                    context.dispatch('getCampaigns');
+                })
+                .catch(err => {
+                    window.Vue.$vToastify.error(`Campaign update failed for ${campaign.name}`, err.response.status);
+                    console.log(`updateCampaign error: ${JSON.stringify(campaign)}`)
+                    console.log(err)
+                })
+        },
+
+        // Permission
+        getPermission(context){
+            axios
+                .get(context.state.api.permission.list)
+                .then(resp => {
+                    context.state.campaign.permissions = resp.data
+                })
+                .catch(err => {
+                    window.Vue.$vToastify.error(`Permission refresh failed`, err.response.status);
+                    console.log(`getPermission error`)
+                    console.log(err)
+                })
+        },
+        updatePermission(context, permission){
+            axios
+                .put(context.state.api.permission.update, permission)
+                .then(() => {
+                    window.Vue.$vToastify.success(`Permission has been updated`, 'Success');
+                    context.dispatch('getPermission')
+                })
+                .catch(err => {
+                    window.Vue.$vToastify.error(`Permission edit failed`, err.response.status);
+                    console.log(`updatePermission error: ${JSON.stringify(permission)}`)
+                    console.log(err)
+                })
+        },
+
+        // Invite
+        getInvites(context){
+            let url = context.state.api.invite.list;
+            axios
+                .get(url)
+                .then(resp => {
+                    context.state.campaign.invites = resp.data
+                })
+                .catch(err => {
+                    window.Vue.$vToastify.error(`Invites refresh failed`, err.response.status);
+                    console.log(`getInvites error: ${url}`)
+                    console.log(err)
+                })
+        },
+        storeInvite(context, invite){
+            let url = context.state.api.invite.store
+            axios
+                .post(url, invite)
+                .then(resp => {
+                    context.state.campaign.inviteToken = `${context.state.api.invite.token}/${resp.data.token}`
+                    context.dispatch('getInvites')
+                    window.Vue.$vToastify.success(`Invite has been created`, 'Success')
+                })
+                .catch(err => {
+                    window.Vue.$vToastify.error(`Invite creation failed`, err.response.status);
+                    console.log(`storeInvite error: ${JSON.stringify(invite)}`)
+                    console.log(err)
+                })
+        },
+        deleteInvite(context, invite){
+            let url = context.state.api.invite.delete;
+            axios
+                .post(url, invite)
+                .then(() => {
+                    context.dispatch('getInvites')
+                    window.Vue.$vToastify.success(`Invite has been deleted`, 'Success')
+                })
+                .catch(err => {
+                    window.Vue.$vToastify.error(`Invite delete failed`, err.response.status);
+                    console.log(`deleteInvite error: ${JSON.stringify(invite)}`)
+                    console.log(err)
+                })
+        },
+
+        // Inventory
         getInventorySummary(context, campaign_id){
             context.commit('axiosStatus', true);
             let url = context.state.api.inventory.summary + `/${campaign_id}`;
@@ -164,32 +318,7 @@ export default new Vuex.Store({
                 })
         },
 
-        storeCampaign(context, campaign){
-            axios
-                .post(context.state.api.campaign.store, campaign)
-                .then(() => {
-                    window.Vue.$vToastify.success(`${campaign.name} has been created`, 'Success');
-                    context.dispatch('getCampaigns');
-                })
-                .catch(err => {
-                    window.Vue.$vToastify.error(`Campaign create failed for ${campaign.name}`, err.response.status);
-                    console.log(`storeCampaign error: ${JSON.stringify(campaign)}`)
-                    console.log(err)
-                })
-        },
 
-        updateCampaign(context, campaign){
-            axios
-                .put(context.state.api.campaign.update, campaign)
-                .then(() => {
-                    window.Vue.$vToastify.success(`${campaign.name} has been updated`, 'Success');
-                    context.dispatch('getCampaigns');
-                })
-                .catch(err => {
-                    window.Vue.$vToastify.error(`Campaign update failed for ${campaign.name}`, err.response.status);
-                    console.log(`updateCampaign error: ${JSON.stringify(campaign)}`)
-                    console.log(err)
-                })
-        }
+
     }
 });

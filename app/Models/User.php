@@ -42,6 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function accounts()
+    {
+        return $this->hasMany('App\Models\LinkedSocialAccounts');
+    }
+
     public function campaignPermissions()
     {
         return $this->hasMany('App\Models\CampaignPermission', 'user_id');
@@ -49,9 +54,6 @@ class User extends Authenticatable
 
     public function campaigns()
     {
-//        \Event::listen('Illuminate\Database\Events\QueryExecuted', function ($query) {
-//            dump($query->sql, $query->bindings, $query->time);
-//        });
         return $this->hasManyThrough(
             'App\Models\Campaign',
             'App\Models\CampaignPermission',

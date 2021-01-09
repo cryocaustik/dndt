@@ -10,14 +10,17 @@
     "require": {
         "php": "^7.3|^8.0",
         "almasaeed2010/adminlte": "~3.0",
+        "doctrine/dbal": "^3.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.8",
+        "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
         "snapappointments/bootstrap-select": "^1.13",
+        "socialiteproviders/discord": "^4.1",
         "yajra/laravel-datatables-oracle": "^9.15"
     },
     "require-dev": {
