@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function accounts()
     {
-        return $this->hasMany('App\Models\LinkedSocialAccounts');
+        return $this->hasMany('App\Models\LinkedSocialAccount');
     }
 
     public function campaignPermissions()

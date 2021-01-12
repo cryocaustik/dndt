@@ -1,9 +1,10 @@
 <?php
 
-namespace app;
+namespace App;
 
 use App\Models\LinkedSocialAccount;
 use Laravel\Socialite\Contracts\User as ProviderUser;
+use App\Models\User;
 
 class SocialAccountService
 {
@@ -14,7 +15,7 @@ class SocialAccountService
             ->where('provider_id', $providerUser->getId())
             ->first();
         if($account){
-            return $account->user();
+            return $account->user;
         }
 
         // check if user exists without social account
