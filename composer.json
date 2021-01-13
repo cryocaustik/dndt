@@ -19,6 +19,7 @@
         "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
+        "marvinlabs/laravel-discord-logger": "^1.1",
         "snapappointments/bootstrap-select": "^1.13",
         "socialiteproviders/discord": "^4.1",
         "yajra/laravel-datatables-oracle": "^9.15"
