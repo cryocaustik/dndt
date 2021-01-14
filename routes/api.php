@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 use \App\Http\Controllers\Api\v1\CampaignController;
 use \App\Http\Controllers\Api\v1\InventoryController;
 use \App\Http\Controllers\Api\v1\CampaignPermissionController;
@@ -17,10 +16,6 @@ use App\Http\Controllers\Api\v1\InviteController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::group([
     'prefix' => 'v1',
