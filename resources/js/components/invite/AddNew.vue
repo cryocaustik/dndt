@@ -130,6 +130,7 @@ export default {
         },
         close(){
             this.invite = this.defaultInvite
+            this.$store.state.campaign.inviteToken = ""
             this.$emit('close')
         }
     },

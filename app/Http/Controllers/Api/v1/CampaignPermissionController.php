@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CampaignPermission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class CampaignPermissionController extends Controller
@@ -45,6 +46,10 @@ class CampaignPermissionController extends Controller
             return response()->json(['msg' => 'Permission not found', 'permission' => $data]);
         }
 
+        if(!Gate::forUser(Auth::user())->allows('update', $permission)){
+            return response()->json(['msg' => 'unauthorized to update'], 401);
+        }
+
         $permission->fill($data);
         if($permission->isDirty()){
             $permission->save();
@@ -71,6 +76,11 @@ class CampaignPermissionController extends Controller
         if(!$permission){
             return response()->json(['msg' => 'Permission not found', 'permission' => $data]);
         }
+
+        if(!Gate::forUser(Auth::user())->allows('delete', $permission)){
+            return response()->json(['msg' => 'unauthorized to delete'], 401);
+        }
+
         $permission->delete();
         return response()->json('Permission deleted', 202);
     }

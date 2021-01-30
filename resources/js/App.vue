@@ -20,12 +20,24 @@ export default {
             return this.$store.state.minimizedApp
         }
     },
+    methods: {
+        windowErrors(){
+            if(!window.errors) return
+
+            window.errors.forEach(err => {
+                window.Vue.$vToastify.error(err, "Error");
+            })
+        }
+    },
     components: {
         NavBar,
         NavDrawer
     },
     mounted() {
         this.$store.commit('setAuthUser', window.authUser);
+        this.windowErrors();
+        // TODO: figure out a way to reroute
+        console.log(this.$route)
     }
 };
 </script>

@@ -59,7 +59,7 @@ export default {
     }),
     methods: {
         refresh(){
-            console.log("refresh")
+            this.$store.dispatch('getCampaigns');
         }
     },
     components: {

@@ -21,7 +21,7 @@
                         <v-btn
                             tile
                             icon
-                            @click.stop="edit(item)"
+                            @click.stop="editCampaign(item)"
                             v-bind="attrs"
                             v-on="on"
                         >
@@ -35,6 +35,7 @@
                     </template>
                     <span>Edit Campaign</span>
                 </v-tooltip>
+
                 <v-tooltip bottom>
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
@@ -54,6 +55,26 @@
                     </template>
                     <span>Edit Permissions</span>
                 </v-tooltip>
+
+                <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            tile
+                            icon
+                            @click.stop="deleteConfirm(item)"
+                            v-bind="attrs"
+                            v-on="on"
+                        >
+                            <v-icon
+                                small
+                                color="red"
+                            >
+                                mdi-delete
+                            </v-icon>
+                        </v-btn>
+                    </template>
+                    <span>Delete Campaign</span>
+                </v-tooltip>
             </template>
         </v-data-table>
 
@@ -62,10 +83,16 @@
             :campaign="selectedCampaign"
             v-on:close="editDialog = false"
         />
+        <Confirm
+            :message="deleteConfirmMsg"
+            :toggle="confirmDialog"
+            v-on:confirm="deleteCampaign"
+        />
     </v-card>
 </template>
 <script>
 import Edit from "./Edit";
+import Confirm from "../includes/Confirm";
 
 export default {
     name: "Summary",
@@ -82,6 +109,14 @@ export default {
             {text: 'Active', value: 'active'},
             {text: 'Actions', value: 'actions', sortable: false },
         ],
+        confirmDialog: false,
+        deleteConfirmMsg: {
+            title: 'Delete Campaign?',
+            message: [
+                `Are you sure you want to delete this campaign?`,
+                `This will also delete any permissions and ALL related inventories, notes, etc., for EVERYONE.`,
+            ]
+        },
     }),
     computed: {
         owner(){
@@ -89,13 +124,25 @@ export default {
         }
     },
     methods: {
-        edit(campaign){
+        editCampaign(campaign){
             this.selectedCampaign = campaign
             this.editDialog = true
+        },
+        deleteConfirm(campaign){
+            this.selectedCampaign = campaign
+            this.confirmDialog = true
+        },
+        deleteCampaign(resp){
+            this.confirmDialog = false
+            if(resp){
+                this.$store.dispatch('deleteCampaign', this.selectedCampaign)
+            }
+            this.selectedCampaign = {}
         }
     },
     components: {
-        Edit
+        Edit,
+        Confirm
     },
     mounted(){
         if(!this.$store.state.campaigns){

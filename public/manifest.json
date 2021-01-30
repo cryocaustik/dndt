@@ -1,0 +1,15 @@
+{
+    "name": "D&D Tracker",
+    "short_name": "DnDT",
+    "lang": "en-US",
+    "start_url": "https://dndt.app",
+    "display": "standalone",
+    "theme_color": "#f44336",
+    "icons": [
+        {
+            "src": "logo-mini-squared-bw",
+            "sizes": "300x300",
+            "type": "img/logo-mini-squared-bw.png"
+        }
+    ]
+}

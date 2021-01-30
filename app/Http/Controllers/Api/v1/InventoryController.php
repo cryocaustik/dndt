@@ -9,6 +9,7 @@ use App\Models\Inventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,6 +17,10 @@ class InventoryController extends Controller
 {
     public function summary($campaign_id)
     {
+        if(!Gate::forUser(Auth::user())->allows('view', Campaign::find($campaign_id))){
+            return response()->json(['msg' => 'unauthorized to view inventory'], 401);
+        }
+
         $inventory = Inventory::where([
                 ['claimed', true],
                 ['quantity', '<', 0]
@@ -32,6 +37,10 @@ class InventoryController extends Controller
 
     public function currency($campaign_id)
     {
+        if(!Gate::forUser(Auth::user())->allows('view', Campaign::find($campaign_id))){
+            return response()->json(['msg' => 'unauthorized to view inventory'], 401);
+        }
+
         $inventory = Inventory::where([
                 ['claimed', true],
                 ['quantity', '<', 0]
@@ -49,6 +58,10 @@ class InventoryController extends Controller
 
     public function log($campaign_id)
     {
+        if(!Gate::forUser(Auth::user())->allows('view', Campaign::find($campaign_id))){
+            return response()->json(['msg' => 'unauthorized to view inventory'], 401);
+        }
+
         $inventory = Inventory::with('campaign')
             ->where('campaign_id', $campaign_id)
             ->get();
@@ -74,6 +87,11 @@ class InventoryController extends Controller
         $validator = Validator::make($data, $rules);
         if($validator->fails()){
             return response()->json(['msg' => 'Validation Failed','validation' => $validator->errors()], 422);
+        }
+
+        $policy = Gate::getPolicyFor('App\Models\Inventory');
+        if(!$policy->create(Auth::user(), $data['campaign_id'])){
+            return response()->json(['msg' => 'unauthorized to create inventory'], 401);
         }
 
         $item = Inventory::create($data);
@@ -106,6 +124,10 @@ class InventoryController extends Controller
             return response()->json(['msg' => 'item not found', 'item' => $data]);
         }
 
+        if(!Gate::allows('update', $existing_item)){
+            return response()->json(['msg' => 'unauthorized to update inventory'], 401);
+        }
+
         $data['modified_by'] = Auth::id();
         $existing_item->fill($data);
         if($existing_item->isDirty()){
@@ -129,6 +151,11 @@ class InventoryController extends Controller
         if(!$existing_item){
             return response()->json('item not found', 400);
         }
+
+        if(!Gate::allows('delete', $existing_item)){
+            return response()->json(['msg' => 'unauthorized to delete inventory'], 401);
+        }
+
         $existing_item->delete();
         return response()->json('item deleted', 202);
     }

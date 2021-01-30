@@ -56,10 +56,11 @@ const routes = [
         name: "inventory",
         meta: { requiresAuth: true },
         component: () => import("./views/Inventory.vue")
-    }
+    },
 ];
 
 const router = new VueRouter({
+    // mode: 'history',
     routes
 });
 
@@ -68,7 +69,7 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth) && !window.authUser) {
         nextRoute = {
             path: "/login",
-            query: { redirect: to.fullPath }
+            // query: { redirect: to.fullPath }
         }
         // next({
         //     path: "/auth",

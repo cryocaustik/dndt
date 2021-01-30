@@ -7,6 +7,7 @@ use App\Models\Campaign;
 use App\Models\CampaignPermission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class CampaignController extends Controller
@@ -61,6 +62,10 @@ class CampaignController extends Controller
             return response()->json(['msg' => 'item not found', 'item' => $data]);
         }
 
+        if(!Gate::forUser(Auth::user())->allows('update', $campaign)){
+            return response()->json(['msg' => 'unauthorized to update'], 401);
+        }
+
         $data['modified_by'] = Auth::id();
         $campaign->fill($data);
         if($campaign->isDirty()){
@@ -70,5 +75,30 @@ class CampaignController extends Controller
             $msg = ['info' => 'Campaign did not have any changes.'];
         }
         return response()->json($msg, 204);
+    }
+
+    public function delete(Request $request)
+    {
+        $data = $request->all();
+
+        $rules = [
+            'id' => ['required', 'exists:campaigns,id']
+        ];
+        $validator = Validator::make($data, $rules);
+        if($validator->fails()){
+            return response()->json(['msg' => 'Validation Failed','validation' => $validator->errors()], 422);
+        }
+
+        $campaign = Campaign::find($data['id']);
+        if(!$campaign){
+            return response()->json(['msg' => 'Campaign not found not found', 'campaign' => $data]);
+        }
+
+        if(!Gate::forUser(Auth::user())->allows('delete', $campaign)){
+            return response()->json(['msg' => 'unauthorized to delete'], 401);
+        }
+
+        $campaign->delete();
+        return response()->json('Campaign deleted', 202);
     }
 }

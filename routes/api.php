@@ -5,6 +5,7 @@ use \App\Http\Controllers\Api\v1\CampaignController;
 use \App\Http\Controllers\Api\v1\InventoryController;
 use \App\Http\Controllers\Api\v1\CampaignPermissionController;
 use App\Http\Controllers\Api\v1\InviteController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +19,28 @@ use App\Http\Controllers\Api\v1\InviteController;
 */
 
 Route::group([
+    'prefix' => 'v1'
+], function (){
+    Route::group(['prefix' => 'auth'], function (){
+//    Auth::routes();
+        Route::get('login', function(){
+            return redirect('/#/login');
+        })->name('login');
+        Route::post('login', [LoginController::class, 'login'])->name('login');
+        Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+    });
+});
+
+Route::group([
     'prefix' => 'v1',
     'middleware' => ['auth:sanctum']
 ], function(){
+
     Route::group(['prefix' => 'campaign'], function(){
         Route::get('/', [CampaignController::class, 'list'])->name('api.campaign.list');
         Route::post('/store', [CampaignController::class, 'store'])->name('api.campaign.store');
         Route::put('/update', [CampaignController::class, 'update'])->name('api.campaign.update');
+        Route::post('/delete', [CampaignController::class, 'delete'])->name('api.campaign.delete');
     });
 
     Route::group(['prefix' => 'permission'], function(){

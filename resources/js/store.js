@@ -10,16 +10,22 @@ export default new Vuex.Store({
         user: null,
         axiosPending: false,
         minimizedApp: false,
+        inviteUrl: `${window.Domain}/invite`,
         api: {
+            auth: {
+                login: `${apiBase}/auth/login`
+            },
             campaign: {
                 list: `${apiBase}/campaign`,
                 store: `${apiBase}/campaign/store`,
                 update: `${apiBase}/campaign/update`,
+                delete: `${apiBase}/campaign/delete`,
             },
             permission: {
                 list: `${apiBase}/permission`,
                 update: `${apiBase}/permission/update`,
                 invite: `${apiBase}/permission/invite`,
+                delete: `${apiBase}/permission/delete`,
             },
             invite: {
                 list: `${apiBase}/invite`,
@@ -70,15 +76,26 @@ export default new Vuex.Store({
     actions: {
         // Ayth
         login(context, credentials){
+            let url = context.state.api.auth.login
             axios
-                .post(`${window.Domain}/auth/login`, credentials)
+                .post(url, credentials)
                 .then(resp => {
                     location.href = "/"
                 })
                 .catch(err => {
-                    window.Vue.$vToastify.error(`Login failed`, err.response.status);
-                    console.log(`login failed`)
-                    console.log(err)
+                    switch (err.response.status){
+                        case 422:
+                            window.Vue.$vToastify.error(`Invalid Username or Password`, `Login Failed`);
+                            return
+                        default:
+                            window.Vue.$vToastify.error(`Login failed`, err.response.status);
+                            console.log(`login failed`)
+                            console.log(err)
+                    }
+
+                    // window.Vue.$vToastify.error(`Login failed`, err.response.status);
+                    // console.log(`login failed`)
+                    // console.log(err)
                 })
         },
         logout(context){
@@ -153,6 +170,19 @@ export default new Vuex.Store({
                     console.log(err)
                 })
         },
+        deleteCampaign(context, campaign){
+            axios
+                .post(context.state.api.campaign.delete, campaign)
+                .then(() => {
+                    window.Vue.$vToastify.success(`${campaign.name} has been deleted`, 'Success');
+                    context.dispatch('getCampaigns');
+                })
+                .catch(err => {
+                    window.Vue.$vToastify.error(`Campaign delete failed for ${campaign.name}`, err.response.status);
+                    console.log(`deleteCampaign error: ${JSON.stringify(campaign)}`)
+                    console.log(err)
+                })
+        },
 
         // Permission
         getPermission(context){
@@ -180,6 +210,19 @@ export default new Vuex.Store({
                     console.log(err)
                 })
         },
+        deletePermission(context, permission){
+            axios
+                .post(context.state.api.permission.delete, permission)
+                .then(() => {
+                    window.Vue.$vToastify.success(`Permission for ${permission.campaign.name} has been deleted`, 'Success');
+                    context.dispatch('getPermission')
+                })
+                .catch(err => {
+                    window.Vue.$vToastify.error(`Permission delete failed for ${permission.campaign.name}`, err.response.status);
+                    console.log(`deletePermission error: ${JSON.stringify(permission)}`)
+                    console.log(err)
+                })
+        },
 
         // Invite
         getInvites(context){
@@ -200,7 +243,7 @@ export default new Vuex.Store({
             axios
                 .post(url, invite)
                 .then(resp => {
-                    context.state.campaign.inviteToken = `${context.state.api.invite.token}/${resp.data.token}`
+                    context.state.campaign.inviteToken = `${context.state.inviteUrl}/${resp.data.token}`
                     context.dispatch('getInvites')
                     window.Vue.$vToastify.success(`Invite has been created`, 'Success')
                 })

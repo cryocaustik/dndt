@@ -40,7 +40,7 @@
         <Confirm
             :message="deleteConfirmMsg"
             :toggle="confirmDialog"
-            v-on:confirm="deleteCampaign"
+            v-on:confirm="deletePermission"
         />
     </v-card>
 </template>
@@ -78,10 +78,10 @@ export default {
             }
             this.confirmDialog = true;
         },
-        deleteCampaign(resp){
+        deletePermission(resp){
             this.confirmDialog = false
             if(resp){
-                this.$store.dispatch('deleteCampaign', this.selectedPermission)
+                this.$store.dispatch('deletePermission', this.selectedPermission)
             }
             this.selectedPermission = {};
         }

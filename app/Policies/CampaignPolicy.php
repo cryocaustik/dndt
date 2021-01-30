@@ -7,6 +7,7 @@ use App\Models\CampaignPermission;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CampaignPolicy
 {
@@ -32,18 +33,20 @@ class CampaignPolicy
      */
     public function view(User $user, Campaign $campaign)
     {
-        return $campaign->permissions()->where('user_id', $user->id)->exists();
+        return $campaign
+            ->permissions()
+            ->where('user_id', $user->id)
+            ->exists();
     }
 
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create()
     {
-        return $user->id === Auth::user()->id;
+
     }
 
     /**
@@ -112,9 +115,9 @@ class CampaignPolicy
     public function invite(User $user, Campaign $campaign)
     {
         return CampaignPermission::where([
-            ['campaign_id', $campaign->id],
-            ['user_id', $user->id],
-        ])
+                ['campaign_id', $campaign->id],
+                ['user_id', $user->id],
+            ])
             ->whereIn('permission', ['owner', 'administrator'])
             ->exists();
     }

@@ -6,9 +6,7 @@
     >
         <v-card>
             <v-card-title>{{ title }}</v-card-title>
-            <v-card-text>
-                {{ stringMessage }}
-            </v-card-text>
+            <v-card-text style="white-space: pre-wrap;">{{ stringMessage }}</v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
@@ -43,7 +41,14 @@ export default {
             return typeof(this.message) == "string" ? "Confirm" : this.message.title
         },
         stringMessage(){
-            return typeof(this.message) == "string" ? this.message : this.message.message
+            if (typeof(this.message) == "string") {
+                return this.message
+            } else if (typeof(this.message.message) == "object") {
+                return this.message.message.join("\n")
+            } else {
+                return this.message.message
+            }
+            // return typeof(this.message) == "string" ? this.message : this.message.message
         }
     }
 }

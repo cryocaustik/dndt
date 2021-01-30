@@ -2,9 +2,12 @@
 
 namespace App\Policies;
 
+use App\Models\Campaign;
+use App\Models\CampaignPermission;
 use App\Models\Inventory;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Log;
 
 class InventoryPolicy
 {
@@ -36,12 +39,17 @@ class InventoryPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
+     * @param int $campaign_id
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user, int $campaign_id)
     {
-        //
+        return $user
+            ->campaignPermissions()
+            ->where('campaign_id', $campaign_id)
+            ->whereIn('permission', ['owner', 'administrator', 'contributor'])
+            ->exists();
     }
 
     /**
@@ -53,7 +61,11 @@ class InventoryPolicy
      */
     public function update(User $user, Inventory $inventory)
     {
-        //
+        return $user
+            ->campaignPermissions()
+            ->where('campaign_id', $inventory->campaign_id)
+            ->whereIn('permission', ['owner', 'administrator', 'contributor'])
+            ->exists();
     }
 
     /**
@@ -65,7 +77,11 @@ class InventoryPolicy
      */
     public function delete(User $user, Inventory $inventory)
     {
-        //
+        return $user
+            ->campaignPermissions()
+            ->where('campaign_id', $inventory->campaign_id)
+            ->whereIn('permission', ['owner', 'administrator'])
+            ->exists();
     }
 
     /**
