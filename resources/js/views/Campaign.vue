@@ -13,7 +13,7 @@
             <v-btn
                 tile
                 icon
-                color="primary"
+                color="blue"
                 @click="refresh"
             >
                 <v-icon>mdi-refresh</v-icon>

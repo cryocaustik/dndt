@@ -13,7 +13,7 @@
             <v-btn
                 tile
                 icon
-                color="primary"
+                color="blue"
                 @click="refresh"
             >
                 <v-icon>mdi-refresh</v-icon>
@@ -35,7 +35,7 @@
 
         <v-tabs
             v-model="tab"
-            color="red"
+            color="primary"
         >
             <v-tab key="permissions" style="width: 50%">
                 Permissions

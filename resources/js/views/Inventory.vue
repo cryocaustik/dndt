@@ -21,7 +21,7 @@
             <v-btn
                 tile
                 icon
-                color="primary"
+                color="blue"
                 @click="refresh"
             >
                 <v-icon>mdi-refresh</v-icon>
@@ -52,7 +52,7 @@
         <ItemFilter :showFilters="showFilters" :filters="filters" class="mb-4"/>
 
         <v-tabs
-            color="red"
+            color="primary"
             v-model="tab"
         >
             <v-tab key="summary" style="width: 50%;">Summary</v-tab>

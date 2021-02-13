@@ -13,7 +13,7 @@
                     small
                     class="mr-2"
                     @click="$emit('view', item.item)"
-                    color="primary"
+                    color="blue"
                 >
                     mdi-file-find-outline
                 </v-icon>

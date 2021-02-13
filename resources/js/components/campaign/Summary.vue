@@ -47,7 +47,7 @@
                         >
                             <v-icon
                                 small
-                                color="primary"
+                                color="blue"
                             >
                                 mdi-account-cog
                             </v-icon>
