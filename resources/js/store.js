@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import router from "./router";
+import Vuetify from "./plugins/vuetify"
 
 Vue.use(Vuex);
 const apiBase = `${window.Domain}/api/v1`;
@@ -10,6 +11,10 @@ export default new Vuex.Store({
         user: null,
         axiosPending: false,
         minimizedApp: false,
+        navDrawer: {
+            permanentDrawer: true,
+            miniDrawer: false,
+        },
         inviteUrl: `${window.Domain}/invite`,
         api: {
             auth: {
@@ -60,7 +65,13 @@ export default new Vuex.Store({
         },
         axiosStatus(state, status){
             state.axiosPending = status;
-        }
+        },
+        miniDrawer(state, toggle){
+            state.navDrawer.miniDrawer = toggle
+        },
+        permanentDrawer(state, toggle){
+            state.navDrawer.permanentDrawer = toggle
+        },
     },
     getters: {
         isLoggedIn(state) {
@@ -71,7 +82,16 @@ export default new Vuex.Store({
         },
         getErrors(state){
             return state.errors
-        }
+        },
+        user(state){
+            return state.user
+        },
+        miniDrawer(state){
+            return state.navDrawer.miniDrawer
+        },
+        permanentDrawer(state){
+            return state.navDrawer.permanentDrawer
+        },
     },
     actions: {
         // Ayth

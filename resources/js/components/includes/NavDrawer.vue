@@ -1,7 +1,16 @@
 <template>
-    <v-navigation-drawer permanent app clipped color="red darken-4">
+    <v-navigation-drawer
+        app
+        clipped
+        color="primary"
+        v-model="visible"
+
+        :permanent="permanentDrawer"
+        :mini-variant="miniDrawer"
+        :expand-on-hover="miniDrawer"
+    >
         <template v-slot:prepend>
-            <v-list-item two-line>
+            <v-list-item class="px-2">
                 <v-list-item-avatar color="grey darken-4">
                     <span class="white--text headline">
                         {{ avatarUsername }}
@@ -41,30 +50,51 @@
 <script>
 export default {
     name: "NavDrawer",
-    data() {
-        return {
-            routes: [
-                {
-                    title: "Campaigns",
-                    route: "campaign",
-                    icon: "mdi-campfire"
-                },
-                {
-                    title: "Permissions",
-                    route: "permission",
-                    icon: "mdi-account-cog-outline"
-                },
-                {
-                    title: "Inventory",
-                    route: "inventory",
-                    icon: "mdi-bag-personal-outline"
-                },
-            ]
+    props: [
+        "toggle"
+    ],
+    data: () => ({
+        visible: true,
+        // permanentDrawer: true,
+        // miniDrawer: false,
+        routes: [
+            {
+                title: "Campaigns",
+                route: "campaign",
+                icon: "mdi-campfire"
+            },
+            {
+                title: "Permissions",
+                route: "permission",
+                icon: "mdi-account-cog-outline"
+            },
+            {
+                title: "Inventory",
+                route: "inventory",
+                icon: "mdi-bag-personal-outline"
+            },
+        ]
+    }),
+    watch: {
+        toggle: function(){
+            this.toggleNavDrawer()
+        },
+        mobileScreen: function(val){
+            this.toggleMobileDrawer(val)
         }
     },
     computed: {
+        permanentDrawer(){
+            return this.$store.getters.permanentDrawer
+        },
+        miniDrawer(){
+            return this.$store.getters.miniDrawer
+        },
+        mobileScreen(){
+            return this.$vuetify.breakpoint.mdAndDown
+        },
         username(){
-            let user = this.$store.state.user;
+            let user = this.$store.getters.user
             if(!user){ return "" }
 
             return user.name ? user.name : user.username
@@ -73,6 +103,31 @@ export default {
             let username = this.username
             return username ? username.split(" ").map(str => str[0]).join("") : "NA"
         }
+    },
+    methods: {
+        toggleMobileDrawer(isMobile){
+            if(isMobile){
+                this.$store.commit("permanentDrawer", false)
+                this.$store.commit("miniDrawer", false)
+            } else {
+                if(!this.$store.getters.permanentDrawer){
+                    this.$store.commit("permanentDrawer", true)
+                }
+            }
+        },
+        toggleNavDrawer(){
+            if(this.mobileScreen){
+                if(this.$store.getters.permanentDrawer){
+                    this.$store.commit("permanentDrawer", false)
+                }
+                this.visible = !this.visible
+            } else {
+                this.$store.commit("miniDrawer", !this.$store.getters.miniDrawer)
+            }
+        },
+    },
+    mounted(){
+        this.toggleMobileDrawer(this.mobileScreen)
     }
 }
 </script>

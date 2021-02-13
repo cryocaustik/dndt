@@ -1,7 +1,7 @@
 <template>
     <v-app>
-        <NavBar v-if="!minimizedApp"/>
-        <NavDrawer v-if="!minimizedApp"/>
+        <NavBar v-if="!minimizedApp" v-on:toggle="toggleNavDrawer = !toggleNavDrawer"/>
+        <NavDrawer v-if="!minimizedApp" :toggle="toggleNavDrawer"/>
 
         <v-main>
             <router-view></router-view>
@@ -12,13 +12,17 @@
 <script>
 import NavBar from "./components/includes/NavBar";
 import NavDrawer from "./components/includes/NavDrawer";
+import Vuetify from "./plugins/vuetify";
 
 export default {
     name: "App",
+    data: () => ({
+        toggleNavDrawer: true
+    }),
     computed: {
         minimizedApp(){
             return this.$store.state.minimizedApp
-        }
+        },
     },
     methods: {
         windowErrors(){

@@ -1,6 +1,6 @@
 <template>
     <v-app-bar app clipped-left dark color="red darken-3">
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click="toggleNavDrawer"></v-app-bar-nav-icon>
 
         <v-toolbar-title @click="$router.push('/')" style="cursor: pointer;">DnDT</v-toolbar-title>
 
@@ -20,14 +20,20 @@
 <script>
 export default {
     name: "NavBar",
-    data(){
-        return {
-            routes: []
+    data: () => ({
+        routes: []
+    }),
+    computed: {
+        minimizedDrawer(){
+            return this.$store.state.minimizedDrawer
         }
     },
     methods: {
         logout(){
             this.$store.dispatch('logout')
+        },
+        toggleNavDrawer(){
+            this.$emit('toggle');
         }
     },
     mounted() {
