@@ -20,7 +20,8 @@
             </v-btn>
 
             <v-spacer></v-spacer>
-            <v-col class="col-lg-4 col-sm-6">
+
+            <v-col class="col-12 col-md-4">
                 <v-text-field
                     v-model="search"
                     prepend-inner-icon="mdi-magnify"

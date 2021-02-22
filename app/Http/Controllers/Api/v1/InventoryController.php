@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Campaign;
 use App\Models\CampaignPermission;
 use App\Models\Inventory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class InventoryController extends Controller
@@ -22,15 +24,21 @@ class InventoryController extends Controller
         }
 
         $inventory = Inventory::where([
+                ['campaign_id', $campaign_id],
                 ['claimed', true],
-                ['quantity', '<', 0]
+                ['quantity', '<', 0],
             ])
             ->orWhere([
+                ['campaign_id', $campaign_id],
                 ['claimed', false],
-                ['campaign_id', $campaign_id]
             ])
-            ->select(DB::raw("item, group_concat(held_by separator ',') as held_by, sum(quantity) as quantity"))
+            ->select(DB::raw("
+                item,
+                group_concat(distinct held_by separator ',') as held_by,
+                sum(quantity) as quantity
+            "))
             ->groupBy('item')
+            ->having('quantity', '>', 0)
             ->get();
         return response()->json($inventory);
     }
@@ -42,16 +50,22 @@ class InventoryController extends Controller
         }
 
         $inventory = Inventory::where([
+                ['campaign_id', $campaign_id],
                 ['claimed', true],
                 ['quantity', '<', 0]
             ])
             ->orWhere([
+                ['campaign_id', $campaign_id],
                 ['claimed', false],
-                ['campaign_id', $campaign_id]
             ])
             ->whereRaw("lower(item) in ('platinum', 'gold', 'electrum', 'silver', 'copper')")
-            ->select(DB::raw("item, group_concat(held_by separator ',') as held_by, sum(quantity) as quantity"))
+            ->select(DB::raw("
+                item,
+                group_concat(distinct held_by separator ',') as held_by,
+                sum(quantity) as quantity"
+            ))
             ->groupBy('item')
+            ->having('quantity', '>', 0)
             ->get();
         return response()->json($inventory);
     }
@@ -158,5 +172,91 @@ class InventoryController extends Controller
 
         $existing_item->delete();
         return response()->json('item deleted', 202);
+    }
+
+    public function import(Request $request)
+    {
+        $rules = [
+            'campaign_id' => [
+                'required',
+                'exists:campaigns,id'
+            ],
+            'file' => 'required|mimetypes:application/csv,text/csv,text/plain',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if($validator->fails()){
+            return response()->json(['msg' => 'Validation Failed','validation' => $validator->errors()], 422);
+        }
+
+        $campaign_id = $request->get('campaign_id');
+        if(!Campaign::find($campaign_id)){
+            return response()->json(['msg' => 'Invalid campaign_id'], 422);
+        }
+
+        $path = $request->file('file')->store('debug');
+
+        $file = fopen(storage_path("app/{$path}"), 'r');
+        $headers = fgetcsv($file);
+
+        // verify required headers exist
+        $required_fields = [
+            'item',
+            'occurred_on',
+            'quantity'
+        ];
+        if(!empty(array_diff($required_fields, $headers))){
+            return response()->json(['msg' => 'Missing required fields'], 422);
+        }
+
+        // define data validation rules
+        $data_rules = [
+            'item' => ['required', 'min:2', 'max:500'],
+            'source' => ['string', 'nullable'],
+            'notes' => ['string', 'nullable'],
+            'quantity' => ['required', 'numeric'],
+            'occurred_on' => ['required', 'date'],
+            'held_by' => ['string', 'nullable'],
+            'claimed' => ['boolean', 'nullable'],
+            'claimed_by' => ['string', 'nullable'],
+            'in_bag_of_holding' => ['boolean', 'nullable'],
+        ];
+        $failed = [];
+        $success = 0;
+
+        while(($data = fgetcsv($file, 1000, ',')) !== false){
+            $record = array_combine($headers, $data);
+
+            if(isset($record['in_bag_of_holding'])){
+                $record['in_bag_of_holding'] = boolval($record['in_bag_of_holding']);
+            }
+            if(!isset($record['claimed']) && isset($record['claimed_by'])){
+                $record['claimed'] = boolval($record['claimed_by']);
+            }
+
+            $validator = Validator::make($record, $data_rules);
+            if($validator->fails()){
+                array_push($failed, [$data, $validator->errors()]);
+                continue;
+            }
+
+            $record['occurred_on'] = Carbon::parse($record['occurred_on']);
+            $record['campaign_id'] = $campaign_id;
+            $record['created_by'] = Auth::id();
+            $record['modified_by'] = Auth::id();
+
+            Inventory::create($record);
+            $success++;
+        }
+
+        // delete file locally
+        Storage::delete($path);
+
+        // compile response
+        $msg = [
+            'msg' => 'Inventory imported',
+            'imported' => $success,
+            'importErrors' => $failed
+        ];
+        return response()->json($msg, 201);
     }
 }

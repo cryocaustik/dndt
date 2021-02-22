@@ -8,7 +8,7 @@
             ></v-img>
 
             <v-divider></v-divider>
-            <v-form @submit.prevent="login">
+            <v-form @submit.prevent="">
                 <v-card-text>
                         <v-text-field
                             v-model="username"

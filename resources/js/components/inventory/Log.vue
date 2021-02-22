@@ -99,8 +99,13 @@ export default {
         isLoading(){
             if(!this.campaignId){
                 return false
-            } else if (this.campaignId && this.$store.state.axiosPending && this.$store.state.inventory.log.length < 1){
+            } else if (
+                this.campaignId &&
+                this.$store.state.axiosPending &&
+                this.$store.state.inventory.log.length < 1){
                 return true
+            } else {
+                return false
             }
         },
         loadingMsg(){

@@ -67,5 +67,6 @@ Route::group([
         Route::post('/store', [InventoryController::class, 'store'])->name('api.inventory.store');
         Route::put('/update', [InventoryController::class, 'update'])->name('api.inventory.update');
         Route::post('/delete', [InventoryController::class, 'delete'])->name('api.inventory.delete');
+        Route::post('/import', [InventoryController::class, 'import'])->name('api.inventory.import');
     });
 });

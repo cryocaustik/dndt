@@ -18,7 +18,8 @@ export default new Vuex.Store({
         inviteUrl: `${window.Domain}/invite`,
         api: {
             auth: {
-                login: `${apiBase}/auth/login`
+                login: `${apiBase}/auth/login`,
+                logout: `${apiBase}/auth/logout`,
             },
             campaign: {
                 list: `${apiBase}/campaign`,
@@ -45,6 +46,7 @@ export default new Vuex.Store({
                 store: `${apiBase}/inventory/store`,
                 update: `${apiBase}/inventory/update`,
                 delete: `${apiBase}/inventory/delete`,
+                import: `${apiBase}/inventory/import`,
             },
         },
         inventory: {
@@ -92,6 +94,15 @@ export default new Vuex.Store({
         permanentDrawer(state){
             return state.navDrawer.permanentDrawer
         },
+        inventorySummary(state){
+            return state.inventory.summary
+        },
+        inventoryLog(state){
+            return state.inventory.log
+        },
+        inventoryCurrency(state){
+            return state.inventory.currency
+        },
     },
     actions: {
         // Ayth
@@ -119,8 +130,9 @@ export default new Vuex.Store({
                 })
         },
         logout(context){
+            let url = context.state.api.auth.logout
             axios
-                .post(`${window.Domain}/auth/logout`)
+                .post(url)
                 .then(() => {
                     context.state.user = null
                     window.authUser = null
@@ -331,11 +343,19 @@ export default new Vuex.Store({
                 .then(resp => {
                     context.state.inventory.currency = resp.data;
                 })
+                .then(() => {
+                    context.commit('axiosStatus', false);
+                })
                 .catch(err => {
                     window.Vue.$vToastify.error(`Inventory Currency Refresh failed`, err.response.status);
                     console.log(`getInventoryCurrency error: ${campaign_id}`)
                     console.log(err)
                 })
+        },
+        getInventory(context, campaign_id){
+            context.dispatch('getInventorySummary', campaign_id)
+            context.dispatch('getInventoryLog', campaign_id)
+            context.dispatch('getInventoryCurrency', campaign_id)
         },
         storeInventory(context, item){
             axios
@@ -380,6 +400,40 @@ export default new Vuex.Store({
                     console.log(err)
                 })
         },
+        importInventory(context, payload){
+            axios
+                .post(
+                    context.state.api.inventory.import,
+                    payload,
+                    {
+                        headers: {
+                            'accept': 'application/json',
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }
+                )
+                .then(resp => {
+                    let errors = resp.data.importErrors
+                    if(errors.length > 0){
+                        let errLen = errors.length
+                        let successLen = resp.data.imported
+                        console.log(`Import errors:`)
+                        console.log(errors)
+                        window.Vue.$vToastify.warning(
+                            `${successLen} records imported, ${errLen} failed; see browser console (f12) for more info.`,
+                            'Success'
+                        );
+                    } else {
+                        window.Vue.$vToastify.success(`File successfully imported`, 'Success');
+                    }
+                    context.dispatch('getInventory', payload.get('campaign_id'))
+                })
+                .catch(err => {
+                    console.log(`File import failed`)
+                    console.log(err)
+                    window.Vue.$vToastify.error(`File import failed`, err.response.status);
+                })
+        }
 
 
 

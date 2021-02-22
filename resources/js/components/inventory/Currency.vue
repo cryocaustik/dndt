@@ -23,20 +23,18 @@
 </template>
 <script>
 export default {
-    name: "Currency",
+    name: "InventoryCurrency",
     props: [
         'campaignId',
         'search'
     ],
-    data(){
-        return {
-            headers: [
-                {text: 'Item', value: 'item'},
-                {text: 'Quantity', value: 'quantity'},
-                {text: 'Actions', value: 'actions', sortable: false },
-            ],
-        }
-    },
+    data: () => ({
+        headers: [
+            {text: 'Item', value: 'item'},
+            {text: 'Quantity', value: 'quantity'},
+            {text: 'Actions', value: 'actions', sortable: false },
+        ],
+    }),
     watch: {
         campaignId: function(campaignId) {
             this.$store.dispatch('getInventoryCurrency', campaignId);
@@ -44,17 +42,20 @@ export default {
     },
     computed: {
         isLoading(){
-            if(!this.campaignId){
-                return false
-            } else if (this.campaignId && this.$store.state.axiosPending && this.$store.state.inventory.currency.length < 1){
+            if (
+                this.campaignId &&
+                this.$store.state.axiosPending &&
+                this.$store.state.inventory.currency.length < 1
+            ){
                 return true
             }
+
+            return false
         },
         loadingMsg(){
             return !this.campaignId ? "Select a Campaign to load data" : "No data found for specified campaign"
         }
     },
-    methods: {},
     mounted(){
         if(this.campaignId){
             this.$store.dispatch('getInventoryCurrency', this.campaignId);

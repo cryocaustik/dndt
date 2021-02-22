@@ -170,7 +170,7 @@ export default {
             let item = this.item;
             item.campaign_id = this.selectedCampaign;
             this.$store.dispatch('storeInventory', item)
-            this.item = this.defaultItem;
+            this.item = {...this.defaultItem};
             this.$emit('close');
         }
     }

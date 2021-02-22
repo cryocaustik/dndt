@@ -7,6 +7,7 @@
             :loading="isLoading"
             :loading-text="loadingMsg"
             :no-data-text="loadingMsg"
+            sort-by="item"
         >
             <template v-slot:item.actions="{ item }">
                 <v-icon
@@ -55,7 +56,6 @@ export default {
             return !this.campaignId ? "Select a Campaign to load data" : "No data found for specified campaign"
         }
     },
-    methods: {},
     mounted(){
         if(this.campaignId){
             this.$store.dispatch('getInventorySummary', this.campaignId);

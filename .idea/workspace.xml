@@ -20,24 +20,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04bd3b90-7c57-46e5-ae29-f3f579ebe4f5" name="Default Changelist" comment="function - initial commit">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/v1/InventoryController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/includes/vuejs.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/inventory/includes/buttons.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/inventory/summary.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/inventory/Export.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/inventory/Import.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dnd-tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dnd-tracker.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CampaignController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CampaignController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CampaignPermissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CampaignPermissionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Inventory.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/CampaignPermission.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/CampaignPermission.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Inventory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Policies/CampaignPermissionPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/CampaignPermissionPolicy.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/campaign/includes/buttons.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/campaign/includes/buttons.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/campaignpermission/includes/buttons.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/campaignpermission/includes/buttons.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/campaignpermission/includes/invite.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/campaignpermission/includes/invite.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/includes/sidenav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/sidenav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/grids/12.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/grids/12.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/v1/InventoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/v1/InventoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/campaign/ChangeOwner.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/campaign/ChangeOwner.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/campaign/Summary.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/campaign/Summary.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/inventory/AddNew.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/inventory/AddNew.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/inventory/Currency.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/inventory/Currency.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/inventory/Log.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/inventory/Log.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/inventory/Summary.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/inventory/Summary.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/Campaign.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Campaign.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/Inventory.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Inventory.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/auth/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/auth/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +56,9 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <interpreter name="sail-8.0/app:latest" composer="composer" />
+    </execution>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -60,6 +67,17 @@
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="XAMP PHP 7.4">
     <include_path>
@@ -168,9 +186,17 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
       <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
       <path value="$PROJECT_DIR$/vendor/league/commonmark" />
-      <path value="$PROJECT_DIR$/vendor/almasaeed2010/adminlte" />
-      <path value="$PROJECT_DIR$/vendor/snapappointments/bootstrap-select" />
-      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-oracle" />
+      <path value="$PROJECT_DIR$/vendor/league/oauth1-client" />
+      <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
+      <path value="$PROJECT_DIR$/vendor/laravel/socialite" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/marvinlabs/laravel-discord-logger" />
+      <path value="$PROJECT_DIR$/vendor/socialiteproviders/discord" />
+      <path value="$PROJECT_DIR$/vendor/socialiteproviders/manager" />
+      <path value="$PROJECT_DIR$/vendor/laravel/sail" />
+      <path value="$PROJECT_DIR$/vendor/laravel/ui" />
     </include_path>
   </component>
   <component name="ProjectId" id="1lGMiKFTtjdSzxEiVa2dv8sPoqV" />
@@ -181,14 +207,18 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Api/Controllers" />
+    <property name="credentialsType com.jetbrains.php.remote.interpreter.ui.PhpCreateRemoteSdkForm" value="Docker" />
+    <property name="credentialsType com.jetbrains.php.remote.interpreter.ui.PhpInplaceEditRemoteSdkForm" value="Docker" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\dndt" />
       <recent name="C:\dev\dnd-tracker\app\Http\Api\Controllers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -198,11 +228,63 @@
       <recent name="C:\dev\dnd-tracker\resources\views\includes" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.watch">
+    <configuration name="post-autoload-dump" type="ComposerRunConfigurationType" factoryName="Composer Script" temporary="true">
+      <option name="pathToComposerJson" value="$PROJECT_DIR$/composer.json" />
+      <option name="script" value="post-autoload-dump" />
+      <method v="2" />
+    </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="hot" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="hot" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="watch" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="watch" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.watch" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.hot" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Composer Script.post-autoload-dump" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -228,7 +310,28 @@
       <workItem from="1608189880809" duration="2632000" />
       <workItem from="1609195316227" duration="421000" />
       <workItem from="1609195771715" duration="3511000" />
+      <workItem from="1612496795574" duration="421000" />
+      <workItem from="1612497228460" duration="1143000" />
+      <workItem from="1612576896654" duration="12335000" />
+      <workItem from="1613114536935" duration="13006000" />
+      <workItem from="1613702567304" duration="6725000" />
+      <workItem from="1613765746858" duration="43910000" />
     </task>
+    <task id="LOCAL-00001" summary="fix navdrawer toggle #6">
+      <created>1613196500827</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1613196500827</updated>
+    </task>
+    <task id="LOCAL-00002" summary="set dark theme colors and fix primary color use">
+      <created>1613197058975</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1613197058975</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,5 +360,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix navdrawer toggle #6" />
+    <MESSAGE value="set dark theme colors and fix primary color use" />
+    <option name="LAST_COMMIT_MESSAGE" value="set dark theme colors and fix primary color use" />
   </component>
 </project>

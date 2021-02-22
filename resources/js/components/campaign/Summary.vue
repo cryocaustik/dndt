@@ -118,11 +118,6 @@ export default {
             ]
         },
     }),
-    computed: {
-        owner(){
-
-        }
-    },
     methods: {
         editCampaign(campaign){
             this.selectedCampaign = campaign
@@ -145,9 +140,11 @@ export default {
         Confirm
     },
     mounted(){
-        if(!this.$store.state.campaigns){
-            this.$store.dispatch('getCampaigns');
-        }
+        setTimeout(() => {
+            if(!this.$store.state.campaigns){
+                this.$store.dispatch('getCampaigns');
+            }
+        }, 1500)
     }
 }
 </script>
