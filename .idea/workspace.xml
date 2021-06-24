@@ -20,29 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04bd3b90-7c57-46e5-ae29-f3f579ebe4f5" name="Default Changelist" comment="function - initial commit">
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/inventory/Export.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/inventory/Import.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dnd-tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dnd-tracker.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/workflows/main.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/views/Profile.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server_deploy.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/v1/InventoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/v1/InventoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/campaign/ChangeOwner.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/campaign/ChangeOwner.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/campaign/Summary.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/campaign/Summary.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/inventory/AddNew.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/inventory/AddNew.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/inventory/Currency.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/inventory/Currency.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/inventory/Log.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/inventory/Log.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/inventory/Summary.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/inventory/Summary.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/Campaign.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Campaign.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/Inventory.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Inventory.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/auth/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/auth/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/includes/NavDrawer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/includes/NavDrawer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/router.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -315,7 +300,11 @@
       <workItem from="1612576896654" duration="12335000" />
       <workItem from="1613114536935" duration="13006000" />
       <workItem from="1613702567304" duration="6725000" />
-      <workItem from="1613765746858" duration="43910000" />
+      <workItem from="1613765746858" duration="46438000" />
+      <workItem from="1614668938666" duration="3751000" />
+      <workItem from="1615576346786" duration="651000" />
+      <workItem from="1617773059708" duration="205000" />
+      <workItem from="1617773298344" duration="16000" />
     </task>
     <task id="LOCAL-00001" summary="fix navdrawer toggle #6">
       <created>1613196500827</created>
@@ -331,7 +320,28 @@
       <option name="project" value="LOCAL" />
       <updated>1613197058975</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="+import/export functionality +minor fixes">
+      <created>1613979172621</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1613979172621</updated>
+    </task>
+    <task id="LOCAL-00004" summary="+npm package lock">
+      <created>1613981003489</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1613981003489</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add matomo">
+      <created>1614669119294</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1614669119294</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -364,6 +374,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix navdrawer toggle #6" />
     <MESSAGE value="set dark theme colors and fix primary color use" />
-    <option name="LAST_COMMIT_MESSAGE" value="set dark theme colors and fix primary color use" />
+    <MESSAGE value="+import/export functionality +minor fixes" />
+    <MESSAGE value="+npm package lock" />
+    <MESSAGE value="add matomo" />
+    <option name="LAST_COMMIT_MESSAGE" value="add matomo" />
   </component>
 </project>

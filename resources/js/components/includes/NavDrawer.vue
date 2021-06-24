@@ -10,8 +10,8 @@
         :expand-on-hover="miniDrawer"
     >
         <template v-slot:prepend>
-            <v-list-item class="px-2">
-                <v-list-item-avatar color="grey darken-4">
+            <v-list-item class="px-2 white--text" :to="{ name: 'profile' }">
+                <v-list-item-avatar color="grey darken-4 white--text">
                     <span class="white--text headline">
                         {{ avatarUsername }}
                     </span>

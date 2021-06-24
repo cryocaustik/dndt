@@ -55,8 +55,16 @@ const routes = [
         path: "/inventory",
         name: "inventory",
         meta: { requiresAuth: true },
-        component: () => import("./views/Inventory.vue")
+        component: () => import("./views/Inventory")
     },
+
+    // User
+    {
+        path: "/profile",
+        name: "profile",
+        meta: { requiresAuth: true },
+        component: () => import("./views/Profile")
+    }
 ];
 
 const router = new VueRouter({
