@@ -1,99 +1,73 @@
-# For more information: https://laravel.com/docs/sail
-version: '3'
+version: "3.9"
+
 services:
   app:
     container_name: dndt_app
     build:
-      context: ./vendor/laravel/sail/runtimes/8.0
-      dockerfile: Dockerfile
-      args:
-        WWWGROUP: '${WWWGROUP}'
-    image: sail-8.0/app
-    ports:
-      - '${APP_PORT:-80}:80'
-    environment:
-      WWWUSER: '${WWWUSER}'
-      LARAVEL_SAIL: 1
+      context: .
+      dockerfile: app.dockerfile
     volumes:
-      - '.:/var/www/html'
+      - ./src/:/var/www/
     networks:
       - dndt_network
     depends_on:
-      - mysql
-      # - pgsql
+      - mariadb
       - redis
-      # - selenium
-  # selenium:
-  #     image: 'selenium/standalone-chrome'
-  #     volumes:
-  #         - '/dev/shm:/dev/shm'
-  #     networks:
-  #         - sail
-  mysql:
+  
+  mariadb:
     container_name: dndt_db
-    image: 'mysql:8.0'
-    ports:
-      - '${FORWARD_DB_PORT:-3306}:3306'
+    image: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-      MYSQL_DATABASE: '${DB_DATABASE}'
-      MYSQL_USER: '${DB_USERNAME}'
-      MYSQL_PASSWORD: '${DB_PASSWORD}'
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_DATABASE: "${DB_DATABASE}"
+      MYSQL_USER: "${DB_USERNAME}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
     volumes:
-      - 'dndtmysql:/var/lib/mysql'
+      - "dndt_mysql:/var/lib/mysql"
     networks:
       - dndt_network
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping" ]
-  #    pgsql:
-  #        image: postgres:13
-  #        ports:
-  #            - '${FORWARD_DB_PORT:-5432}:5432'
-  #        environment:
-  #            PGPASSWORD: '${DB_PASSWORD:-secret}'
-  #            POSTGRES_DB: '${DB_DATABASE}'
-  #            POSTGRES_USER: '${DB_USERNAME}'
-  #            POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
-  #        volumes:
-  #            - 'sailpostgresql:/var/lib/postgresql/data'
-  #        networks:
-  #            - dndt_network
-  #        healthcheck:
-  #          test: ["CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}"]
+      test: [ "CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}" ]
+      retries: 3
+      timeout: 5s
+
   redis:
     container_name: dndt_redis
-    image: 'redis:alpine'
+    image: "redis:alpine"
     ports:
-      - '${FORWARD_REDIS_PORT:-6379}:6379'
+      - "${REDIS_PORT:-6379}:6379"
     volumes:
-      - 'dndtredis:/data'
+      - "dndt_redis:/data"
     networks:
       - dndt_network
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
-  # memcached:
-  #     image: 'memcached:alpine'
-  #     ports:
-  #         - '11211:11211'
-  #     networks:
-  #         - sail
-  mailhog:
-    container_name: dndt_mailhog
-    image: 'mailhog/mailhog:latest'
+      retries: 3
+      timeout: 5s
+
+  nginx:
+    container_name: dndt_nginx
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./src/:/var/www
+      - ./nginx/:/etc/nginx/conf.d/
     ports:
-      - '${FORWARD_MAILHOG_PORT:-1025}:1025'
-      - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
+      - 9001:80
+      - 9002:443
     networks:
       - dndt_network
 
 networks:
   dndt_network:
-    driver: bridge
+
 volumes:
-  dndtmysql:
+  dndt_mysql:
     driver: local
-  #    sailpostgresql:
-  #        driver: local
-  dndtredis:
+  dndt_redis:
     driver: local

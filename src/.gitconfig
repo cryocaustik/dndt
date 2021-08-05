@@ -1,0 +1,7 @@
+[core]
+	editor = \"C:\\Users\\cryocaustik\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --wait
+[user]
+	name = Alex Skobelev
+	email = alex@alazy.dev
+[credential]
+	helper = "!f() { /var/www/.vscode-server/bin/c3f126316369cd610563c75b1b1725e0679adfb3/node /tmp/vscode-remote-containers-779042fbde5e9807f16e4d85d2572fbabace797d.js $*; }; f"

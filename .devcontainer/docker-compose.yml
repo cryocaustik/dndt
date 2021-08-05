@@ -1,0 +1,11 @@
+version: '3'
+services:
+  # app:
+  #   command: /bin/sh -c "while sleep 1000; do :; done"
+  npm:
+    container_name: dndt_npm
+    image: node:lts
+    volumes:
+      - "./src/:/var/www/"
+    working_dir: /var/www
+    entrypoint: ['npm', 'run', 'watch-poll']
