@@ -1,0 +1,7 @@
+.git
+.idea
+.env.prod
+storage/logs
+storage/cache
+node_modules
+vendor
