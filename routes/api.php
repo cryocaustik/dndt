@@ -20,10 +20,10 @@ use App\Http\Controllers\Auth\LoginController;
 
 Route::group([
     'prefix' => 'v1'
-], function (){
-    Route::group(['prefix' => 'auth'], function (){
-//    Auth::routes();
-        Route::get('login', function(){
+], function () {
+    Route::group(['prefix' => 'auth'], function () {
+        //    Auth::routes();
+        Route::get('login', function () {
             return redirect('/#/login');
         })->name('login');
         Route::post('login', [LoginController::class, 'login'])->name('login');
@@ -34,16 +34,16 @@ Route::group([
 Route::group([
     'prefix' => 'v1',
     'middleware' => ['auth:sanctum']
-], function(){
+], function () {
 
-    Route::group(['prefix' => 'campaign'], function(){
+    Route::group(['prefix' => 'campaign'], function () {
         Route::get('/', [CampaignController::class, 'list'])->name('api.campaign.list');
         Route::post('/store', [CampaignController::class, 'store'])->name('api.campaign.store');
         Route::put('/update', [CampaignController::class, 'update'])->name('api.campaign.update');
         Route::post('/delete', [CampaignController::class, 'delete'])->name('api.campaign.delete');
     });
 
-    Route::group(['prefix' => 'permission'], function(){
+    Route::group(['prefix' => 'permission'], function () {
         Route::get('/', [CampaignPermissionController::class, 'list'])
             ->name('api.permission.list');
         Route::put('/update', [CampaignPermissionController::class, 'update'])
@@ -52,19 +52,20 @@ Route::group([
             ->name('api.permission.delete');
     });
 
-    Route::group(['prefix' => 'invite'], function(){
+    Route::group(['prefix' => 'invite'], function () {
         Route::get('/', [InviteController::class, 'list'])->name('api.invite.list');
         Route::post('/store', [InviteController::class, 'store'])->name('api.invite.store');
         Route::post('/delete', [InviteController::class, 'delete'])->name('api.invite.delete');
     });
 
-    Route::group(['prefix' => 'inventory'], function(){
+    Route::group(['prefix' => 'inventory'], function () {
         Route::get('/summary/{campaign_id}', [InventoryController::class, 'summary'])
             ->name('api.inventory.summary');
         Route::get('/log/{campaign_id}', [InventoryController::class, 'log'])->name('api.inventory.log');
         Route::get('/currency/{campaign_id}', [InventoryController::class, 'currency'])
             ->name('api.inventory.currency');
         Route::post('/store', [InventoryController::class, 'store'])->name('api.inventory.store');
+        Route::post('/store_multiple', [InventoryController::class, 'storeMultiple'])->name('api.inventory.store_multiple');
         Route::put('/update', [InventoryController::class, 'update'])->name('api.inventory.update');
         Route::post('/delete', [InventoryController::class, 'delete'])->name('api.inventory.delete');
         Route::post('/import', [InventoryController::class, 'import'])->name('api.inventory.import');

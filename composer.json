@@ -1,10 +1,10 @@
 {
-    "name": "laravel/laravel",
+    "name": "cryocaustik/dndt",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "DnDT - Dungeons and Dragons Tracker",
     "keywords": [
-        "framework",
-        "laravel"
+        "dndt",
+        "dungeons&dragons"
     ],
     "license": "MIT",
     "require": {
