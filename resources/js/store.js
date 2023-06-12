@@ -44,6 +44,7 @@ export default new Vuex.Store({
                 summary: `${apiBase}/inventory/summary`,
                 currency: `${apiBase}/inventory/currency`,
                 store: `${apiBase}/inventory/store`,
+                storeMultiple: `${apiBase}/inventory/store_multiple`,
                 update: `${apiBase}/inventory/update`,
                 delete: `${apiBase}/inventory/delete`,
                 import: `${apiBase}/inventory/import`,
@@ -360,7 +361,7 @@ export default new Vuex.Store({
         storeInventory(context, item){
             axios
                 .post(context.state.api.inventory.store, item)
-                .then(resp => {
+                .then(() => {
                     window.Vue.$vToastify.success(`Item created successfully!`, 'Success');
                     context.dispatch('getInventorySummary', item.campaign_id)
                     context.dispatch('getInventoryLog', item.campaign_id)
@@ -369,6 +370,23 @@ export default new Vuex.Store({
                 .catch(err => {
                     window.Vue.$vToastify.error(`Item create failed for ${item.item}`, err.response.status);
                     console.log(`storeInventory error: ${JSON.stringify(item)}`)
+                    console.log(err)
+                })
+        },
+        storeInventoryMultiple(context, items){
+            let campaign_id = items[0].campaign_id;
+            axios
+                .post(context.state.api.inventory.storeMultiple, items)
+                .then(() => {
+                    window.Vue.$vToastify.success(`Items created successfully!`, 'Success');
+                    context.dispatch('getInventorySummary', campaign_id)
+                    context.dispatch('getInventoryLog', campaign_id)
+                    context.dispatch('getInventoryCurrency', campaign_id)
+                })
+                .catch(err => {
+                    window.Vue.$vToastify.error(`Item create failed`, err.response.status);
+                    console.log(`storeInventoryMulti error: ${JSON.stringify(items)}`)
+                    console.log(err.response.data)
                     console.log(err)
                 })
         },

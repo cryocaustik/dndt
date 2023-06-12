@@ -63,6 +63,12 @@ Using composer, install dependencies
 composer install
 ```
 
+or in docker
+
+```sh
+docker run -it --rm -v $(pwd):/var/www/html -w /var/www/html composer install
+```
+
 ### Setup .env
 
 Copy .env.example and generate an app key
