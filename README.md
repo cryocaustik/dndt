@@ -6,8 +6,17 @@
 
 
 <p align="center">
-    <a href="" style="padding-right: 1em;">Documentation (coming soon)</a>
+    <a href="/cryocaustik/dndt">
+        <img src="https://img.shields.io/badge/documentation-coming%20soon-lightgrey">
+    </a>
     <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <a href="/cryocaustik/dndt">
+        <img src="https://img.shields.io/badge/version-1.0.1-blue" alt="version 1.0.1">
+    </a>
+    <a href="/cryocaustik/dndt">
+        <img src="https://img.shields.io/github/downloads/cryocaustik/dndt/total?style=plastic">
+    </a>
+    
 </p>
 
 ## About DnDT
